@@ -13,7 +13,7 @@ npm run build      # registry + production build
 npm run registry   # regenerate public/r/*.json only
 ```
 
-Set `NEXT_PUBLIC_SITE_URL` to your deployed URL so install commands and registry links point at it.
+The site is live at https://konsa.rohitxyz.me. Install commands and registry links use that address; set `NEXT_PUBLIC_SITE_URL` to override it (for example on a preview deployment).
 
 ## Where things live
 

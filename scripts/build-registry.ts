@@ -8,7 +8,7 @@ import { blockEntries as blocks, registry } from "../src/lib/registry.ts";
 
 const root = process.cwd();
 const out = path.join(root, "public", "r");
-const site = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://kanso-ui.vercel.app").replace(/\/$/, "");
+const site = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://konsa.rohitxyz.me").replace(/\/$/, "");
 const schema = "https://ui.shadcn.com/schema/registry-item.json";
 
 
