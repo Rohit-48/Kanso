@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kanso UI
 
-## Getting Started
+Minimal, accessible React components you copy into your app and own. Built with Tailwind CSS v4 and Radix, served in the shadcn registry format.
 
-First, run the development server:
+See [PLAN.md](PLAN.md) for the design principles, architecture and roadmap.
+
+## Develop
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000 (rebuilds the registry first)
+npm run build      # registry + production build
+npm run registry   # regenerate public/r/*.json only
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Set `NEXT_PUBLIC_SITE_URL` to your deployed URL so install commands and registry links point at it.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Where things live
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `src/registry/ui/`: the components (the files users copy)
+- `src/registry/examples/`: one demo per component
+- `src/registry/blocks/`: larger compositions
+- `src/lib/registry.ts`: component metadata (title, category, usage)
+- `scripts/build-registry.ts`: writes `public/r/` for the shadcn CLI
 
-## Learn More
+## Adding a component
 
-To learn more about Next.js, take a look at the following resources:
+1. Add `src/registry/ui/<name>.tsx`.
+2. Add `src/registry/examples/<name>-demo.tsx` and register it in `src/registry/examples/index.ts`.
+3. Add an entry to `src/lib/registry.ts`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The docs page, sidebar link, search entry and registry JSON are generated from those.

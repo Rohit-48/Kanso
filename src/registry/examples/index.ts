@@ -1,0 +1,35 @@
+import type { ComponentType } from "react";
+import dynamic from "next/dynamic";
+
+// One lazily loaded demo per component, keyed by registry name.
+export const examples: Record<string, ComponentType> = {
+  accordion: dynamic(() => import("./accordion-demo")),
+  alert: dynamic(() => import("./alert-demo")),
+  avatar: dynamic(() => import("./avatar-demo")),
+  badge: dynamic(() => import("./badge-demo")),
+  button: dynamic(() => import("./button-demo")),
+  card: dynamic(() => import("./card-demo")),
+  checkbox: dynamic(() => import("./checkbox-demo")),
+  dialog: dynamic(() => import("./dialog-demo")),
+  "dropdown-menu": dynamic(() => import("./dropdown-menu-demo")),
+  empty: dynamic(() => import("./empty-demo")),
+  input: dynamic(() => import("./input-demo")),
+  kbd: dynamic(() => import("./kbd-demo")),
+  label: dynamic(() => import("./label-demo")),
+  popover: dynamic(() => import("./popover-demo")),
+  progress: dynamic(() => import("./progress-demo")),
+  "radio-group": dynamic(() => import("./radio-group-demo")),
+  select: dynamic(() => import("./select-demo")),
+  separator: dynamic(() => import("./separator-demo")),
+  sheet: dynamic(() => import("./sheet-demo")),
+  skeleton: dynamic(() => import("./skeleton-demo")),
+  slider: dynamic(() => import("./slider-demo")),
+  sonner: dynamic(() => import("./sonner-demo")),
+  spinner: dynamic(() => import("./spinner-demo")),
+  switch: dynamic(() => import("./switch-demo")),
+  table: dynamic(() => import("./table-demo")),
+  tabs: dynamic(() => import("./tabs-demo")),
+  textarea: dynamic(() => import("./textarea-demo")),
+  toggle: dynamic(() => import("./toggle-demo")),
+  tooltip: dynamic(() => import("./tooltip-demo")),
+};

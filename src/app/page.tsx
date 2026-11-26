@@ -1,69 +1,130 @@
-import Image from "next/image";
+import Link from "next/link";
+import {
+  AccessibilityIcon,
+  BlocksIcon,
+  CodeIcon,
+  FeatherIcon,
+  PaletteIcon,
+  TerminalIcon,
+} from "lucide-react";
+import { Bento } from "@/components/site/landing/bento";
+import { Cta } from "@/components/site/landing/cta";
+import { Hero } from "@/components/site/landing/hero";
+import { Marquee } from "@/components/site/landing/marquee";
+import { Stats } from "@/components/site/landing/stats";
+import {
+  ScrambleText,
+  SectionLabel,
+  Stagger,
+  StaggerItem,
+} from "@/components/site/motion";
+import { blockEntries, registry } from "@/lib/registry";
+import { siteUrl } from "@/lib/site";
+
+const principles = [
+  {
+    icon: CodeIcon,
+    title: "You own the code",
+    text: "Each component is one file in your repo. Change anything, with no wrapper to fight.",
+  },
+  {
+    icon: FeatherIcon,
+    title: "Quiet by default",
+    text: "Hairline borders, a neutral palette and small shadows. The content stays in front.",
+  },
+  {
+    icon: AccessibilityIcon,
+    title: "Accessible",
+    text: "Built on Radix primitives: focus management, keyboard support and ARIA included.",
+  },
+  {
+    icon: PaletteIcon,
+    title: "Themeable",
+    text: "Every colour is an OKLCH variable. Swap a palette or the radius in one place.",
+  },
+  {
+    icon: TerminalIcon,
+    title: "CLI ready",
+    text: "Served in the shadcn registry format. One command adds a component and its dependencies.",
+  },
+  {
+    icon: BlocksIcon,
+    title: "Blocks",
+    text: "Sign-in, stats, settings and inbox sections, composed and ready to drop in.",
+  },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main>
+      <Hero
+        count={registry.length}
+        installArgs={`add ${siteUrl}/r/button.json`}
+      />
+
+      <Stats
+        items={[
+          { value: registry.length, label: "Components" },
+          { value: blockEntries.length, label: "Blocks" },
+          { value: 6, label: "Theme presets" },
+          { value: 1, suffix: " file", label: "Per component, yours to edit" },
+        ]}
+      />
+
+      <Bento />
+
+      <section className="border-t">
+        <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6">
+          <div className="mb-12 grid max-w-2xl gap-3">
+            <SectionLabel index="02">Principles</SectionLabel>
+            <h2 className="text-3xl font-semibold tracking-[-0.035em] text-balance sm:text-5xl">
+              Less to learn, less to override, less to ship.
+            </h2>
+          </div>
+          <Stagger className="grid gap-px border bg-border sm:grid-cols-2 lg:grid-cols-3">
+            {principles.map(({ icon: Icon, title, text }, i) => (
+              <div
+                key={title}
+                className="group bg-background transition-colors hover:bg-muted/30"
+              >
+                <StaggerItem className="grid content-start gap-4 p-7">
+                  <div className="flex items-center justify-between">
+                    <span className="flex size-9 items-center justify-center border bg-card transition-colors duration-300 group-hover:bg-foreground group-hover:text-background">
+                      <Icon className="size-4" strokeWidth={1.5} />
+                    </span>
+                    <span className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground">
+                      P.{String(i + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <div className="grid gap-1.5">
+                    <h3 className="font-mono text-xs tracking-[0.16em] uppercase">
+                      <ScrambleText text={title} trigger="view" />
+                    </h3>
+                    <p className="text-sm leading-6 text-muted-foreground">
+                      {text}
+                    </p>
+                  </div>
+                </StaggerItem>
+              </div>
+            ))}
+          </Stagger>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      </section>
+
+      <section className="border-y bg-muted/20 py-16">
+        <div className="mx-auto mb-8 flex max-w-7xl items-end justify-between gap-4 px-4 sm:px-6">
+          <SectionLabel index="03">Every component</SectionLabel>
+          <Link
+            href="/docs/components"
+            className="font-mono text-[11px] tracking-[0.16em] text-muted-foreground uppercase hover:text-foreground"
           >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            View all →
+          </Link>
         </div>
-      </main>
-    </div>
+        <Marquee items={registry.map(({ name, title }) => ({ name, title }))} />
+      </section>
+
+      <Cta />
+    </main>
   );
 }
